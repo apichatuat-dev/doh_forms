@@ -13,26 +13,26 @@ services:
       - "8080:80"
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html/public
-    depends_on:
-      - mysql
-    networks:
-      - laravel-net
+    # depends_on:
+    #   - mysql
+    # networks:
+    #   - laravel-net
 
   # MySQL Database
-  mysql:
-    image: mysql:8
-    container_name: laravel-mysql
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: your_mysql_root_password
-      MYSQL_DATABASE: your_database_name
-      MYSQL_USER: your_database_user_name
-      MYSQL_PASSWORD: your_database_user_password
-    volumes:
-      - ./mysql_data:/var/lib/mysql
-    networks:
-      - laravel-net
+#   mysql:
+#     image: mysql:8
+#     container_name: laravel-mysql
+#     ports:
+#       - "3306:3306"
+#     environment:
+#       MYSQL_ROOT_PASSWORD: your_mysql_root_password
+#       MYSQL_DATABASE: your_database_name
+#       MYSQL_USER: your_database_user_name
+#       MYSQL_PASSWORD: your_database_user_password
+#     volumes:
+#       - ./mysql_data:/var/lib/mysql
+#     networks:
+#       - laravel-net
 
-networks:
-  laravel-net:
+# networks:
+#   laravel-net:
