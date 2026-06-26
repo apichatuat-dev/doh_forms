@@ -26,10 +26,10 @@ class HomeController extends Controller
     public function index(Request $request)
     {
                 // Fetch all products from the database
-        $products = Product::all();
+        // $products = Product::all();
 
         // return view('index');
-        return view('product.index', compact('products'));
+        return view('product.index');
 
         // dd($request);
              // Step 1 ขอ Token
