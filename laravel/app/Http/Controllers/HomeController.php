@@ -25,55 +25,55 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-                // Fetch all products from the database
-        // $products = Product::all();
-
-        // return view('index');
-        return view('product.index');
-
         // dd($request);
              // Step 1 ขอ Token
-        // $response = Http::post('https://onelogin.doh.go.th/api/authen', [
-        //     'code' => 'f222c4fe320923d0c1662b597194dfb5a88491574df70c8b0dc52b5718cd0fa8'
-        // ]);
-//         $response = Http::asJson()->post('https://onelogin.doh.go.th/api/authen', [
-//     'code' => 'f222c4fe320923d0c1662b597194dfb5a88491574df70c8b0dc52b5718cd0fa8',
-// ]);
+        $response = Http::post('https://onelogin.doh.go.th/api/authen', [
+            'code' => 'f222c4fe320923d0c1662b597194dfb5a88491574df70c8b0dc52b5718cd0fa8'
+        ]);
+        dd($response);
+        $response = Http::asJson()->post('https://onelogin.doh.go.th/api/authen', [
+    'code' => 'f222c4fe320923d0c1662b597194dfb5a88491574df70c8b0dc52b5718cd0fa8',
+]);
 
-// if ($response->successful()) {
-//     $data = $response->json();
+if ($response->successful()) {
+    $data = $response->json();
 
-//     $token = $data['token']; // หาก API คืนค่า token
+    $token = $data['token']; // หาก API คืนค่า token
 
-//     dd($data);
-// } else {
-//     dd($response->status(), $response->body());
-// }
-//         dd($response);
+    dd($data);
+} else {
+    dd($response->status(), $response->body());
+}
+        dd($response);
 
-//         if (!$response->successful()) {
-//             return response()->json([
-//                 'message' => 'ไม่สามารถรับ Token ได้'
-//             ], 500);
-//         }
-//         $token = $response->json('token');
+        if (!$response->successful()) {
+            return response()->json([
+                'message' => 'ไม่สามารถรับ Token ได้'
+            ], 500);
+        }
+        $token = $response->json('token');
 
-//         // Step 2 ขอข้อมูลผู้ใช้
-//         $userResponse = Http::withToken($token)
-//             ->get('https://onelogin.doh.go.th/api/user');
+        // Step 2 ขอข้อมูลผู้ใช้
+        $userResponse = Http::withToken($token)
+            ->get('https://onelogin.doh.go.th/api/user');
 
-//         if (!$userResponse->successful()) {
-//             return response()->json([
-//                 'message' => 'ไม่สามารถดึงข้อมูลผู้ใช้ได้'
-//             ], 500);
-//         }
+        if (!$userResponse->successful()) {
+            return response()->json([
+                'message' => 'ไม่สามารถดึงข้อมูลผู้ใช้ได้'
+            ], 500);
+        }
 
-//         $user = $userResponse->json();
+        $user = $userResponse->json();
 
-//         return response()->json([
-//             'token' => $token,
-//             'user' => $user
-//         ]);
+        return response()->json([
+            'token' => $token,
+            'user' => $user
+        ]);
 
+        // Fetch all products from the database
+        $products = Product::all();
+
+        // return view('index');
+        return view('product.index', compact('products'));
     }
 }
