@@ -25,6 +25,8 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        return view('product.index');
+
         // dd($request);
              // Step 1 ขอ Token
         $response = Http::post('https://onelogin.doh.go.th/api/authen', [
