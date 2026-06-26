@@ -29,10 +29,10 @@ class HomeController extends Controller
 
         // dd($request);
              // Step 1 ขอ Token
-        $response = Http::post('https://onelogin.doh.go.th:8080/api/authen', [
-            'code' => 'f222c4fe320923d0c1662b597194dfb5a88491574df70c8b0dc52b5718cd0fa8'
-        ]);
-        dd($response);
+        // $response = Http::post('https://onelogin.doh.go.th:8080/api/authen', [
+        //     'code' => 'f222c4fe320923d0c1662b597194dfb5a88491574df70c8b0dc52b5718cd0fa8'
+        // ]);
+        // dd($response);
         $response = Http::asJson()->post('https://onelogin.doh.go.th/api/authen', [
     'code' => 'f222c4fe320923d0c1662b597194dfb5a88491574df70c8b0dc52b5718cd0fa8',
 ]);
