@@ -67,7 +67,7 @@ async function loginAndGetUser() {
         Accept: 'application/json'
     }
 });
-
+delete api.defaults.headers.common['X-Requested-With'];
 const userResponse = await api.get(
     'https://onelogin.doh.go.th:8080/api/user'
 );
