@@ -62,15 +62,18 @@ async function loginAndGetUser() {
 
         // 2. เรียกข้อมูลผู้ใช้
         const userResponse = await axios.get(
-            'https://onelogin.doh.go.th:8080/api/user',
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                }
-            }
-        );
+    'https://onelogin.doh.go.th:8080/api/user',
+    {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        withCredentials: true
+    }
+);
 
-        console.log("User:", userResponse.data);
+        console.log("User:", userResponse);
 
     } catch (error) {
 
