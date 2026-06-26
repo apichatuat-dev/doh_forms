@@ -64,10 +64,8 @@ async function loginAndGetUser() {
         const userResponse = await axios.get(
             'https://onelogin.doh.go.th:8080/api/user',
             {
-                withCredentials: true,
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    Accept: 'application/json'
                 }
             }
         );
