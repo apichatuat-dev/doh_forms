@@ -32,9 +32,11 @@
 
 });
 </script> --}}
+a
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script>
+    alert("d")
 async function loginAndGetUser() {
     try {
 
@@ -45,6 +47,7 @@ async function loginAndGetUser() {
                 code: "f222c4fe320923d0c1662b597194dfb5a88491574df70c8b0dc52b5718cd0fa8"
             },
             {
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -61,6 +64,7 @@ async function loginAndGetUser() {
         const userResponse = await axios.get(
             'https://onelogin.doh.go.th:8080/api/user',
             {
+                withCredentials: true,
                 headers: {
                     Authorization: `Bearer ${token}`,
                     Accept: 'application/json'
