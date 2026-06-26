@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
@@ -24,7 +25,37 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        dd($request);
+        // dd($request);
+             // Step 1 ขอ Token
+        $response = Http::post('https://onelogin.doh.go.th/api/authen', [
+            'code' => 'f222c4fe320923d0c1662b597194dfb5a88491574df70c8b0dc52b5718cd0fa8'
+        ]);
+        dd($response);
+
+        if (!$response->successful()) {
+            return response()->json([
+                'message' => 'ไม่สามารถรับ Token ได้'
+            ], 500);
+        }
+        $token = $response->json('token');
+
+        // Step 2 ขอข้อมูลผู้ใช้
+        $userResponse = Http::withToken($token)
+            ->get('https://onelogin.doh.go.th/api/user');
+
+        if (!$userResponse->successful()) {
+            return response()->json([
+                'message' => 'ไม่สามารถดึงข้อมูลผู้ใช้ได้'
+            ], 500);
+        }
+
+        $user = $userResponse->json();
+
+        return response()->json([
+            'token' => $token,
+            'user' => $user
+        ]);
+
         // Fetch all products from the database
         $products = Product::all();
 
