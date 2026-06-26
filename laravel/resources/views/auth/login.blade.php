@@ -53,6 +53,7 @@
 								    	Password is required
 							    	</div> --}}
 								</div>
+                                {{dd(session()->all());}}
 {{--
 								<div class="d-flex align-items-center">
 									<div class="form-check">
