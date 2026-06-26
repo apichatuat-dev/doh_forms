@@ -40,7 +40,7 @@ class HomeController extends Controller
 if ($response->successful()) {
     $data = $response->json();
 
-    $token = $data['token']; // หาก API คืนค่า token
+    // $token = $data['token']; // หาก API คืนค่า token
 
     dd($data);
 } else {
