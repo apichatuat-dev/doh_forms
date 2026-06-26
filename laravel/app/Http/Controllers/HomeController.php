@@ -27,9 +27,22 @@ class HomeController extends Controller
     {
         // dd($request);
              // Step 1 ขอ Token
-        $response = Http::post('https://onelogin.doh.go.th/api/authen', [
-            'code' => 'f222c4fe320923d0c1662b597194dfb5a88491574df70c8b0dc52b5718cd0fa8'
-        ]);
+        // $response = Http::post('https://onelogin.doh.go.th/api/authen', [
+        //     'code' => 'f222c4fe320923d0c1662b597194dfb5a88491574df70c8b0dc52b5718cd0fa8'
+        // ]);
+        $response = Http::asJson()->post('https://onelogin.doh.go.th/api/authen', [
+    'code' => 'f222c4fe320923d0c1662b597194dfb5a88491574df70c8b0dc52b5718cd0fa8',
+]);
+
+if ($response->successful()) {
+    $data = $response->json();
+
+    $token = $data['token']; // หาก API คืนค่า token
+
+    dd($data);
+} else {
+    dd($response->status(), $response->body());
+}
         dd($response);
 
         if (!$response->successful()) {
