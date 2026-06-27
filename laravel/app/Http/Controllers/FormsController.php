@@ -9,12 +9,13 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Province;
 use App\Models\District;
 use App\Models\SubDistrict;
+use Illuminate\Support\Facades\Auth;
 
 class FormsController extends Controller
 {
     public function index()
     {
-
+    dd(Auth::user());
     $bording_logs = BordingLog::with('province')->get();
 
         return view('forms.index', compact('bording_logs'));
