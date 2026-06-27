@@ -10,6 +10,9 @@ use App\Http\Controllers\Auth\LoginController;
 Route::get('/districts/{province}', [LocationController::class, 'districts']);
 Route::get('/sub-districts/{district}', [LocationController::class, 'subDistricts']);
 Route::post('/login/onelogin', [LoginController::class, 'oneLogin']);
+Route::post('/logout', [LoginController::class, 'logout'])
+    ->name('logout');
+
 Auth::routes();
 
 // Index route
