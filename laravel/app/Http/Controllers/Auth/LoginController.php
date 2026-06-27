@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -37,4 +40,32 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+        public function oneLogin(Request $request)
+    {
+        $u = $request->user;
+
+        $user = User::updateOrCreate(
+            [
+                'idcard' => $u['idcard']
+            ],
+            [
+                'name'         => $u['name'],
+                'surname'      => $u['surname'],
+                'position'     => $u['position'],
+                'position_id'  => $u['position_id'],
+                'organization' => $u['organization'],
+                'org_id_1'     => $u['org_id_1'],
+                'group_name'   => $u['group_name'],
+            ]
+        );
+
+        Auth::login($user, true);
+
+        return response()->json([
+            'success' => true,
+            'redirect' => route('home')
+        ]);
+    }
+
 }

@@ -73,7 +73,13 @@ const userResponse = await api.get(
 );
 
         console.log("User:", userResponse);
+const user = userResponse.data.data[0];
 
+await axios.post('/login/onelogin', {
+    user: user
+});
+
+window.location.href = "/forms";
     } catch (error) {
 
         if (error.response) {
