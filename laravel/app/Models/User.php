@@ -25,7 +25,8 @@ class User extends Authenticatable
     'position_id',
     'organization',
     'org_id_1',
-    'group_name'
+    'group_name',
+    'remember_token'
     ];
 
     /**
